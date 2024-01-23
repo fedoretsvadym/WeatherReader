@@ -7,7 +7,7 @@ To start project run "docker-compose up --build -d"
 Api endpoint:
 http://0.0.0.0:8000/temperature/?day=2024-01-23
 
-Headers (can be edited in .env file) :
+Headers (x-token value can be edited in .env file, but this value is a MUST for now) :
 {
     x-token: TSpDX?y8o-nNPtDtUw=2aL3OAsi?bBdA
 }
