@@ -1,0 +1,62 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    container_name: db
+    restart: always
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'testtask'
+      MYSQL_DATABASE: 'testtask'
+      MYSQL_USER: 'usr'
+      MYSQL_PASSWORD: 'pwd11111'
+    ports:
+      - "3306:3306"
+    networks:
+      - privnet
+
+  redis:
+    image: redis:alpine
+    networks:
+      - privnet
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    command: sh -c "python3 manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - celery
+    networks:
+      - privnet
+
+  celery:
+    build: .
+    command: celery -A leadsdoitTestTask.celery.app worker -B
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    networks:
+      - privnet
+
+volumes:
+  data:
+
+
+networks:
+  privnet:
