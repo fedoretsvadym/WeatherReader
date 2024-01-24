@@ -33,3 +33,5 @@ Response
 }
 
 Weather API trial period ends 06.02, so if you check it after, let me know to updated token.
+
+Worker creates WeatherState instance every 00 mins of each hour (13:00, 14:00, ..., 20:00 etc)
