@@ -47,6 +47,7 @@ services:
   celery:
     build: .
     command: celery -A leadsdoitTestTask.celery.app worker -B
+    restart: always
     volumes:
       - .:/app
     depends_on:
