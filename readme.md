@@ -34,4 +34,4 @@ Response
 
 Weather API trial period ends 06.02, so if you check it after, let me know to updated token.
 
-Worker creates WeatherState instance every 00 mins of each hour (13:00, 14:00, ..., 20:00 etc)
+Worker creates WeatherState instance every 00 mins of each hour (13:00, 14:00, ..., 20:00 etc) and in the time you start project(first time worker wont pull(db starts longer than celery task). If you want to pull immediately restart the project after first build)
