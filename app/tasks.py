@@ -21,6 +21,7 @@ def pull_weather():
         if not data:
             # some logs
             print("Error occurred when executed API")
+            return
         temperature = data.get("current").get("temp_c")
         WeatherState.objects.create(city=city,
                                     temperature=temperature)
