@@ -1,5 +1,3 @@
-Test task for LeadsDoIt
-
 To start project run "docker-compose up --build -d"
 
 
